@@ -7,104 +7,67 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ATMAPI.Models;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using ATMAPI.Services;
+using Microsoft.AspNetCore.Authentication;
 
 namespace ATMAPI.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("controller")]
     [ApiController]
-    public class ATMController : ControllerBase
+    public class ATMController : ApiControllerAttribute
     {
-        private readonly IPinService _context;
+        private IBalanceEnquiryService _balanceEnquiryService;
+        private ICashWithdrawalService _cashWithdrawalService;
+        private IPinValidationService _pinValidationService;
 
-        public ATMController(IPinService context)
-        {
-            _context = context;
-        }
+           
 
-        // GET: api/ToDoes
+        // GET: used to get the account balance
         [HttpGet]
-       // public async Task<ActionResult<IEnumerable<IPinService>>> GetToDos()
-        //{
-          //  return await _context.GetService<IPinService>();  
-        //}
+        public string BalanceEnquiry(long Pin)
 
-        // GET: api/ToDoes/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<IPinService>> GetToDo(long id)
         {
-            var toDo = await _context.ToDos.FindAsync(id);
+            _balanceEnquiryService = new IBalanceEnquiryService();
 
-            if (toDo == null)
-            {
-                return NotFound();
-            }
+            string Balance = _balanceEnquiryService.BalanceEnquiry(Pin);
 
-            return toDo;
+            return Balance;
         }
 
-        // PUT: api/ToDoes/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutToDo(long id, IPinService toDo)
+
+        // PUT: Used to update the account balance based on the withdrawal amount entered
+       [HttpPut]
+        public string CashWithdrawal(long Pin, double Amount, double ATMBalance)
         {
-            if (id != toDo.ID)
-            {
-                return BadRequest();
-            }
+            _cashWithdrawalService = new ICashWithdrawalService();
 
-            _context.Entry(toDo).State = EntityState.Modified;
-
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ToDoExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+            return _cashWithdrawalService.WithdrawAmount(Pin, Amount, ATMBalance);
         }
 
-        // POST: api/ToDoes
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<IPinService>> PostToDo(IPinService toDo)
-        {
-           // Microsoft.EntityFrameworkCore.ChangeTracking.EntityEntry<IPinService> entityEntry = _context.ToDos.Add(toDo);
-            await _context.SaveChangesAsync();
 
-            return CreatedAtAction(nameof(GetToDo), new { id = toDo.ID }, toDo);
-        }
-
-        // DELETE: api/ToDoes/5
-        [HttpDelete("{id}")]
-        public async Task<ActionResult<IPinService>> DeleteToDo(long id)
+        // Get: Used to validate the entered PIN
+       [HttpGet]
+        public string ValidatePin(long pinID)
         {
-            var toDo = await _context.ToDos.FindAsync(id);
-            if (toDo == null)
+            _pinValidationService = new IPinValidationService();
+
+            if(_pinValidationService.ValidatePin(pinID) == true)
+              {
+                return "Valid Pin";
+              }
+
+            else
             {
-                return NotFound();
+                return "Invalid Pin";
             }
 
-            _context.ToDos.Remove(toDo);
-            await _context.SaveChangesAsync();
-
-            return toDo;
         }
 
-        private bool ToDoExists(long id)
-        {
-            return _context.ToDos.Any(e => e.ID == id);
-        }
+
     }
 }
+     
+
+     
+    
+

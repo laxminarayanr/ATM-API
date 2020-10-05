@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30523.141
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATMAPI", "WebApplication1\ATMAPI.csproj", "{50C54742-C090-4B43-824F-29596D22CC89}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ATMTest", "..\ATMTest\ATMTest\ATMTest.csproj", "{BFD6552D-8AA2-42AF-9224-5616C81166CE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{50C54742-C090-4B43-824F-29596D22CC89}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50C54742-C090-4B43-824F-29596D22CC89}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50C54742-C090-4B43-824F-29596D22CC89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BFD6552D-8AA2-42AF-9224-5616C81166CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFD6552D-8AA2-42AF-9224-5616C81166CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFD6552D-8AA2-42AF-9224-5616C81166CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFD6552D-8AA2-42AF-9224-5616C81166CE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
