@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Threading.Tasks;
-using ATMAPI.Models;
+﻿using ATMAPI.Models;
 
 namespace ATMAPI.Services
 {
@@ -15,8 +10,10 @@ namespace ATMAPI.Services
         {
             Card card = new Card();
 
+            //setter method called to set the correct PIN for the card
             card.setPin();
 
+            //validation if the PIN entered by the user matches the correct PIN, return true or false accordingly
             if(Pin == card.getPin())
             {
                 return true;

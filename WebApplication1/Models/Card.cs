@@ -1,18 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.VisualBasic;
+﻿using Microsoft.VisualBasic;
 
 namespace ATMAPI.Models
 {
     public class Card
     {
+        //TODO: implementation of getter and setter methods for the Card Number
         public long CardNumber { get; set; }
 
+        //TODO: implementation of getter and setter methods for the Card expiry date
         public DateFormat ExpiryDate { get; set; }
 
+        //TODO" implementation of getter and setter methods for the Card Holder name
         public string CardHolderName { get; set; }
 
         public long Pin { get; set; }
@@ -24,6 +22,7 @@ namespace ATMAPI.Models
 
         }
 
+        //Method to get the PIN set for an ATM card
         public long getPin()
         {
             return Pin;

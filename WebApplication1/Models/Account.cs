@@ -33,6 +33,7 @@ namespace ATMAPI.Models
             _AccountNumber = AccountNumber;
         }
 
+        //This method returns the Account Number
         public long getAccountNumber()
         {
             return _AccountNumber;

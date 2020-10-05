@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using ATMAPI.Models;
-using Microsoft.EntityFrameworkCore.Infrastructure;
+
 using ATMAPI.Services;
 using Microsoft.AspNetCore.Authentication;
+
+//TODO: using methods created within this class in the ATM step definitions. This is currently throwing an Assembly version mismatch error
 
 namespace ATMAPI.Controllers
 {
@@ -16,7 +12,7 @@ namespace ATMAPI.Controllers
     [ApiController]
     public class ATMController : ApiControllerAttribute
     {
-        private IBalanceEnquiryService _balanceEnquiryService;
+        private IBalanceEnquiryService _balanceEnquiryService; 
         private ICashWithdrawalService _cashWithdrawalService;
         private IPinValidationService _pinValidationService;
 
@@ -35,7 +31,7 @@ namespace ATMAPI.Controllers
         }
 
 
-        // PUT: Used to update the account balance based on the withdrawal amount entered
+        // PUT: Used to update the account balance based on the withdrawal amount entered, ATM Balance and PIN
        [HttpPut]
         public string CashWithdrawal(long Pin, double Amount, double ATMBalance)
         {
